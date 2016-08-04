@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+     .flex-center-vertically {
+         display: flex;
+         justify-content: center;
+         flex-direction: column;
+         height: 100%;
+         text-align: center;
+         font-size: 5000%;
+     }
+
+     body {
+         font-family: "Roboto", sans-serif;
+         color: #3371e3;
+     }
+    </style>
+  </head>
+
+  <body>
+    <p class="flex-center-vertically" id="counter">0</p>
+
+    <script>
+     var recognition = new webkitSpeechRecognition();
+     recognition.continuous = true;
+
+     recognition.onresult = function(event) {
+         var results = event.results;
+         var i = results.length - 1;
+         var j = results[i].length - 1;
+         var transcript = results[i][j].transcript;
+
+         var ocurrences = transcript.split("kubernetes").length - 1
+         if (ocurrences > 0) {
+             counter = document.getElementById("counter");
+             counter.innerHTML = parseInt(counter.innerHTML) + ocurrences;
+         }
+     }
+
+     recognition.start();
+    </script>
+  </body>
+</html>
